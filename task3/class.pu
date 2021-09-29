@@ -1,0 +1,113 @@
+@startuml exclass
+
+class AlterSort{
+    ~int[] a
+    ~String plan = ""
+    ~void swap(int i, int j)
+    +void load(int[] a)
+    +void sort()
+    +String getPlan()
+}
+
+class BubbleSorter{
+    ~int[] a
+    ~String plan = ""
+    ~void swap(int i, int j)
+    +void load(int[] a)
+    +void sort()
+    +String getPlan()
+}
+
+class QuickSorter{
+    ~int[] a
+    ~String plan = ""
+    ~void swap(int i, int j)
+    +void load(int[] a)
+    +void sort()
+    +String getPlan()
+    +void quickSort(int start, int end)
+    +int p(int start, int end)
+}
+
+class Geezer{
+    {static}~Geezer theGeezer
+    {static}+Geezer getTheGeezer()
+    ~String[] parsePlan(String plan)
+    ~void execute(String step)
+    +void setSorter(Sorter sorter)
+    +String lineUp(Line line)
+    +String matrixUp(Matrix matrix)
+}
+
+class Gorblin{
+    ~int r 
+    ~int g 
+    ~int b
+    ~int rank
+    ~String rankstring
+
+    +Position getPosition()
+    +void setPosition(Position position)
+    +int getValue()
+    +void swapPosition(Linable linable)
+    +String toString() 
+}
+
+
+abstract class Linable{
+    ~Position position
+    {abstract}void setPosition(Position position);
+    {abstract}Position getPosition();
+    {abstract}int getValue();
+    {abstract}void swapPosition(Linable lineable);
+
+}
+
+class Line{
+    ~Position[] positions
+    +void put(Linable linable, int i)
+    +Linable get(int i)
+    +String toString()
+    +Linable[] toArray()
+    +Line arrByRange(int start, int end)
+}
+
+class Matrix{
+    ~int row 
+    ~int col
+    ~Line line
+
+    +Matrix(int row, int col)
+    +void put(Linable linable, int r, int c)
+    +void put(Linable linable, int loc)
+    +Linable get(int loc)
+    +String toString() 
+    +Linable[] toArray() 
+}
+
+class Position{
+    ~Linable linable
+    +void setLinable(Linable linable)
+}
+
+interface Sorter{
+    +void load(int[] elements);
+    +void sort();
+    +String getPlan();
+}
+
+class Scene{
+    +void makeRandomArray(int min, int max, int count)
+}
+
+BubbleSorter --|> Sorter : 接口实现
+AlterSort --|> Sorter : 接口实现
+QuickSorter --|> Sorter : 接口实现
+Geezer --|> Sorter : 拥有（选择排序方式）
+Gorblin --|> Linable : 继承抽象类
+Line --|> Position : 队中的位置集合
+Position --|> Linable : 某个位置内的成员
+Linable --|> Position : 某个成员的位置
+Matrix --|> Line : 矩阵中包括行
+
+@enduml

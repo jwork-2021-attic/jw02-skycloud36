@@ -1,0 +1,22 @@
+@startuml
+    actor Geezer as Gee
+    actor Gourd1 as One
+    actor Gourd2 as Two
+    actor Gourd3 as Three
+    actor Gourd4 as Four
+    actor Gourd5 as Five
+    actor Gourd6 as Six
+    actor Gourd7 as Seven
+    entity Line as queue
+
+    One -> queue : 进入第7个位置
+    Two -> queue : 进入第4个位置
+    Three->queue : 进入第2个位置
+    Four-> queue : 进入第6个位置
+    Five-> queue : 进入第3个位置
+    Six -> queue : 进入第5个位置
+    Seven->queue : 进入第1个位置
+
+    Gee-->Gee:到来，选择排序
+    Gee->queue:排序
+@enduml

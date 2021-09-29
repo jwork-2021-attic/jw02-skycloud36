@@ -1,0 +1,71 @@
+@startuml exclass
+
+class BubbleSorter{
+    ~int[] a
+    ~String plan = ""
+    ~void swap(int i, int j)
+    +void load(int[] a)
+    +void sort()
+    +String getPlan()
+}
+
+class Geezer{
+    {static}~Geezer theGeezer
+    {static}+Geezer getTheGeezer()
+    ~String[] parsePlan(String plan)
+    ~void execute(String step)
+    +void setSorter(Sorter sorter)
+    +String lineUp(Line line)
+}
+
+enum Gourd{
+    ONE
+    TWO
+    THREE
+    FOUR
+    FIVE
+    SIX
+    SEVEN
+    ~int r, g, b
+    {static}+Gourd getGourdByRank(int rank)
+    +int rank()
+    +String toString()
+    +void setPosition(Position position)
+    +Position getPosition()
+    +void swapPosition(Gourd another)
+    +int getValue()
+}
+
+interface Linable{
+    +void setPosition(Position position);
+    +Position getPosition();
+    +int getValue();
+}
+
+class Line{
+    ~Position[] positions
+    +void put(Linable linable, int i)
+    +Linable get(int i)
+    +String toString()
+    +Linable[] toArray()
+}
+
+class Position{
+    ~Linable linable
+    +void setLinable(Linable linable)
+}
+
+interface Sorter{
+    +void load(int[] elements);
+    +void sort();
+    +String getPlan();
+}
+
+BubbleSorter --|> Sorter : 接口实现
+Geezer --|> Sorter : 拥有（选择排序方式）
+Gourd --|> Linable : 接口实现
+Line --|> Position : 队中的位置集合
+Position --|> Linable : 某个位置内的成员
+
+
+@enduml
